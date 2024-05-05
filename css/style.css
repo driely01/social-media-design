@@ -17,18 +17,43 @@
 	box-sizing: border-box;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+body {
+	background-color: var(--bg-100);
+}
 ul { list-style: none; }
 hr {
 	border: 1px solid var(--bg-300);
 	border-radius: 5px;
 }
+.option {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	padding: 10px 10px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.option:hover {
+	background-color: var(--bg-200);
+}
 .hr { padding: 0 10px; }
 .profile-pic {
 	width: 40px;
 	height: 40px;
-	background-color: var(--primary-100);
+	background-color: var(--bg-300);
 	border-radius: 50%;
+	position: relative;
 	cursor: pointer;
+}
+.online {
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	background-color: var(--primary-200);
+	border-radius: 50%;
+	border: 2px solid var(--bg-100);
+	bottom: 0;
+	right: 0;
 }
 .add-posts,
 .like-posts {
@@ -53,15 +78,16 @@ hr {
 }
 .add-post .icon,
 .like-post .icon {
-	width: 30px;
+	width: 40px;
 	border-radius: 10px;
-	background-color: var(--primary-300);
+	background-color: var(--bg-300);
+	color: var(--text-200);
 }
 .add-post .title,
 .like-post .title {
 	width: 100%;
 	border-radius: 10px;
-	background-color: var(--primary-200);
+	background-color: var(--bg-300);
 }
 .input-something {
 	background-color: var(--bg-300);
@@ -77,8 +103,12 @@ hr {
 .input-something:focus { outline: none; }
 /* ------------------------------------------------ */
 header {
+	position: fixed;
+	top: 0;
+	z-index: 12;
 	padding: 5px 20px;
 	height: 56px;
+	width: 100%;
 	background-color: var(--bg-200);
 	display: flex;
 	flex-direction: row;
@@ -139,12 +169,16 @@ header .right-header .profile-pic svg {
 	color: var(--text-200);
 }
 .container {
+	margin-top: 56px;
 	padding: 10px;
 	background-color: var(--bg-100);
-
 	display: grid;
 	grid-template-columns: 20% calc(100% - 40% - 40px) 20% ;
 	gap: 20px;
+	max-width: 1280px;
+	margin: 0 auto;
+	margin-top: 56px;
+	position: relative;
 }
 .container .item {
 	word-wrap: break-word;
@@ -152,32 +186,38 @@ header .right-header .profile-pic svg {
 	flex-direction: column;
 	gap: 20px;
 }
-.container .left-items .option {
-	display: flex;
-	flex-direction: row;
-	gap: 10px;
-	padding: 10px 10px;
-	border-radius: 10px;
-	cursor: pointer;
-}
-.container .left-items .option:hover {
-	background-color: var(--bg-300);
+
+.container .left-items {
+	right: 0;
+	top: 66px;
+	position: sticky;
+	overflow-y: hidden;
+	height: calc(100vh - 76px);
 }
 .container .left-items .profile .profile-name {
 	width: calc(100% - 50px);
-	background-color: var(--primary-200);
+	background-color: var(--bg-300);
 	border-radius: 10px;
 }
 .container .left-items .icon {
-	width: 30px;
-	height: 30px;
+	width: 40px;
+	height: 40px;
 	border-radius: 10px;
-	background-color: var(--primary-300);
+	color: var(--text-200);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.container .left-items .icon svg {
+	width: 30px;
 }
 .container .left-items .title {
 	border-radius: 10px;
-	width: calc(100% - 30px);
-	background-color: var(--primary-200);
+	width: calc(100% - 50px);
+	background-color: var(--bg-300);
+}
+.container .left-items .game {
+	background-color: var(--bg-300);
 }
 .container .main-items .stories-container {
 	position: relative;
@@ -290,12 +330,12 @@ header .right-header .profile-pic svg {
 	width: calc(100% - 130px);
 	border-radius: 10px;
 	height: 40px;
-	background-color: var(--primary-100);
+	background-color: var(--bg-300);
 }
 .container .main-items .post .header-post .icon {
 	width: 30px;
 	height: 30px;
-	background-color: var(--primary-200);
+	background-color: var(--bg-300);
 	border-radius: 10px;
 	cursor: pointer;
 }
@@ -317,14 +357,17 @@ header .right-header .profile-pic svg {
 .container .main-items .footer-post .infos .likes .icon {
 	width: 30px;
 	height: 30px;
-	background-color: var(--primary-100);
-	border-radius: 10px;
+	color: var(--text-200);
+	background-color: var(--bg-300);
+	padding: 5px;
+	border-radius: 50%;
+	display: flex;
 	cursor: pointer;
 }
 .container .main-items .footer-post .infos .likes .title {
 	width: 100px;
 	height: 30px;
-	background-color: var(--primary-300);
+	background-color: var(--bg-300);
 	border-radius: 10px;
 	cursor: pointer;
 }
@@ -333,8 +376,82 @@ header .right-header .profile-pic svg {
 	height: 30px;
 	width: 30px;
 	border-radius: 10px;
-	background-color: var(--primary-100);
+	background-color: var(--bg-300);
 	cursor: pointer;
 }
 .container .main-items .footer-post .hr { padding: 0 20px; }
 .container .main-items .footer-post .like-posts { padding: 10px 20px; }
+.container .main-items .footer-post .like-posts .icon {
+	background: none;
+}
+
+.container .right-items {
+	right: 0;
+	top: 66px;
+	position: sticky;
+	overflow-y: hidden;
+	height: calc(100vh - 76px);
+	box-sizing: content-box;
+}
+.container .right-items:hover,
+.container .left-items:hover {
+	overflow-y: scroll;
+}
+.container .right-items::-webkit-scrollbar,
+.container .left-items::-webkit-scrollbar { width: 5px; }
+.container .right-items::-webkit-scrollbar-track,
+.container .left-items::-webkit-scrollbar-track { border-radius: 10px }
+.container .right-items::-webkit-scrollbar-thumb,
+.container .left-items::-webkit-scrollbar-thumb {
+	background-color: var(--bg-300);
+	border-radius: 10px;
+}
+.container .right-items .title-section {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	justify-content: space-between;
+}
+.container .right-items .title-section .title {
+	background-color: var(--bg-300);
+	height: 30px;
+	width: calc(100% - 40px);
+	border-radius: 10px;
+}
+.container .right-items .title-section .option-icon {
+	width: 30px;
+	height: 30px;
+	color: var(--text-200);
+}
+.container .right-items .pages {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+.container .right-items .my-pages,
+.container .right-items .contact {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	padding: 10px;
+	cursor: pointer;
+	border-radius: 10px;
+}
+.container .right-items .my-pages:hover,
+.container .right-items .contact:hover {
+	background-color: var(--bg-200);
+}
+.container .right-items .my-pages .title,
+.container .right-items .contact .title {
+	width: calc(100% - 50px);
+	background-color: var(--bg-300);
+	border-radius: 10px;
+}
+.container .right-items .pages .page-option {
+	margin-left: 10px;
+	padding-left: 20px;
+}
+.container .right-items .pages .page-option .profile-pic {
+	width: 35px;
+	height: 35px;
+}
