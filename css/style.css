@@ -254,7 +254,8 @@ header .right-header .profile-pic svg {
 @media (max-width: 1100px) {
 	.container .left-items { display: none; }
 }
-.container .main-items .stories-container {
+.container .main-items .stories-container,
+.container .main-items .container-suggestion {
 	position: relative;
 }
 .container .main-items .content .previous-btn,
@@ -269,23 +270,34 @@ header .right-header .profile-pic svg {
 	border-radius: 50%;
 	color: var(--accent-200);
 	cursor: pointer;
+	opacity: .6;
+	transition: all 400ms ease;
+}
+.container .main-items .content .show-btn:hover {
+	opacity: .9;
 }
 .container .main-items .content .previous-btn {
 	left: 8px;
 	z-index: 3;
+	opacity: 0;
 }
+.container .main-items .content .show-btn { opacity: .6; }
+.container .main-items .content .hide-btn { opacity: 0;}
 .container .main-items .content .next-btn {
 	right: 8px;
 }
-.container .main-items .stories-container .stories {
+.container .main-items .stories-container .stories,
+.container .main-items .container-suggestion .suggestion-list {
 	display: flex;
 	flex-direction: row;
 	overflow-x: scroll;
 	scrollbar-width: none; 
 	gap: 10px;
+	scroll-behavior: smooth;
 }
-.container .main-items .stories-container .stories::-webkit-scrollbar {
-	 display: none; 
+.container .main-items .stories-container .stories::-webkit-scrollbar,
+.container .main-items .container-suggestion .suggestion-list::-webkit-scrollbar {
+	display: none; 
 }
 .container .main-items .stories-container .stories .story {
 	height: 250px;
@@ -296,6 +308,80 @@ header .right-header .profile-pic svg {
 	overflow: hidden;
 	position: relative;
 	cursor: pointer;
+}
+.container .main-items .container-suggestion .suggestion-list {
+	padding: 10px 20px;
+}
+.container .main-items .container-suggestion .suggestion-list .suggestion-friend {
+	height: 292px;
+	width: 192px;
+	background-color: var(--bg-200);
+	border: 1px solid var(--bg-300);
+	border-radius: 10px;
+	flex-shrink: 0;
+	overflow: hidden;
+	position: relative;
+	display: flex;
+	gap: 5px;
+	flex-direction: column;
+	padding-bottom: 10px;
+}
+.container .main-items .container-suggestion .suggestion-list .suggestion-friend .suggestion-picture {
+	height: 192px;
+	background-color: var(--bg-300);
+	cursor: pointer;
+}
+.container .main-items .container-suggestion .suggestion-list .suggestion-friend .suggestion-name {
+	height: 17px;
+	width: 90%;
+	border-radius: 10px;
+	align-self: center;
+	background-color: var(--bg-300);
+	cursor: pointer;
+}
+.container .main-items .container-suggestion .suggestion-list .suggestion-friend .mutual-friends {
+	height: 20px;
+	width: 90%;
+	align-self: center;
+	color: var(--text-200);
+	font-size: 14px;
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	align-items: center;
+}
+.container .main-items .container-suggestion .suggestion-list .suggestion-friend .mutual-friends .mutual-picture {
+	background-color: var(--bg-300);
+	width: 17px;
+	height: 17px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+.container .main-items .container-suggestion .suggestion-list .suggestion-friend .mutual-friends .mutual-numbers {
+	cursor: pointer;
+}
+.container .main-items .container-suggestion .suggestion-list .suggestion-friend .add-friend {
+	height: 36px;
+	width: 90%;
+	border: none;
+	border-radius: 10px;
+	justify-self: flex-end;
+	align-self: center;
+	background-color: var(--primary-100);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	gap: 10px;
+	padding: 10px 20px;
+	color: var(--primary-300);
+	font-size: 18px;
+}
+.container .main-items .container-suggestion .suggestion-list .suggestion-friend .add-friend svg {
+	height: 25px;
+}
+.container .main-items .container-suggestion .suggestion-list .suggestion-friend .add-friend:hover {
+	background-color: var(--primary-200);
 }
 .container .main-items .stories-container .stories .contact {
 	position: absolute;
@@ -369,6 +455,9 @@ header .right-header .profile-pic svg {
 	gap: 10px;
 	padding: 10px 20px;
 }
+.container .main-items .post .title-section {
+	padding: 10px 20px;
+}
 .container .main-items .post .header-post .title {
 	width: calc(100% - 130px);
 	border-radius: 10px;
@@ -385,6 +474,31 @@ header .right-header .profile-pic svg {
 .container .main-items .post .main-content {
 	background-color: var(--bg-300);
 	height: 300px;
+}
+.container .main-items .changed-profile .main-content {
+	height: 449px;
+	background: none;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+.container .main-items .changed-profile .container-profile {
+	border-bottom: 1px solid var(--bg-300);
+}
+.container .main-items .changed-profile .main-content .cover {
+	height: 50%;
+	background-color: var(--bg-300);
+}
+.container .main-items .changed-profile .main-content .profile-picture {
+	width: 388px;
+	height: 388px;
+	background-color: var(--bg-100);
+	position: absolute;
+	border-radius: 50%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border: 3px solid var(--bg-200);
 }
 .container .main-items .post .footer-post {
 	display: flex;
@@ -454,19 +568,19 @@ header .right-header .profile-pic svg {
 	background-color: var(--bg-300);
 	border-radius: 10px;
 }
-.container .right-items .title-section {
+.title-section {
 	display: flex;
 	flex-direction: row;
 	gap: 10px;
 	justify-content: space-between;
 }
-.container .right-items .title-section .title {
+.title-section .title {
 	background-color: var(--bg-300);
 	height: 30px;
 	width: calc(100% - 40px);
 	border-radius: 10px;
 }
-.container .right-items .title-section .option-icon {
+.title-section .option-icon {
 	width: 30px;
 	height: 30px;
 	color: var(--text-200);
