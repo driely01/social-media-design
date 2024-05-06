@@ -1,1 +1,1 @@
-# social-media-design
+###### in this model. decided to simulate facebook design
